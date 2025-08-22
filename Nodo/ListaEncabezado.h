@@ -27,6 +27,7 @@ template<typename T> class ListaEncabezado
         }
 
         void insertarNodoCabecera(NodoCabecera<T>* nuevo);
+
         NodoCabecera<T>* getEncabezado(int id)
         {
             NodoCabecera<T>* actual = primero;

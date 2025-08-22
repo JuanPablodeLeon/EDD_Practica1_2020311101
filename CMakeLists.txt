@@ -15,6 +15,8 @@ set(SOURCES
         Nodo/NodoCabecera.h
         Nodo/ListaEncabezado.cpp
         Nodo/ListaEncabezado.h
+        Nodo/MatrizDispersa.cpp
+        Nodo/MatrizDispersa.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
