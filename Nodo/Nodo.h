@@ -6,8 +6,18 @@
 #define EDD_PRACTICA1_2020311101_NODO_H
 
 
+template <typename T>
 class Nodo
 {
+    private:
+     T valor;
+     Nodo<T>* siguiente;
+    public:
+     Nodo(T valor)
+     {
+         this->valor = valor;
+         this->siguiente = nullptr;
+     }
 };
 
 

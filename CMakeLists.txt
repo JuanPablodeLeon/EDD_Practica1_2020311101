@@ -9,14 +9,14 @@ set(SOURCES
         Nodo/Nodo.cpp
         Cola/Cola.cpp
         Cola/Cola.h
-        Nodo/NodoInterno.cpp
-        Nodo/NodoInterno.h
-        Nodo/NodoCabecera.cpp
-        Nodo/NodoCabecera.h
-        Nodo/ListaEncabezado.cpp
-        Nodo/ListaEncabezado.h
-        Nodo/MatrizDispersa.cpp
-        Nodo/MatrizDispersa.h
+        MatrizDispersa/NodoInterno.cpp
+        MatrizDispersa/NodoInterno.h
+        MatrizDispersa/NodoCabecera.cpp
+        MatrizDispersa/NodoCabecera.h
+        MatrizDispersa/ListaEncabezado.cpp
+        MatrizDispersa/ListaEncabezado.h
+        MatrizDispersa/MatrizDispersa.cpp
+        MatrizDispersa/MatrizDispersa.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

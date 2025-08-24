@@ -4,15 +4,19 @@
 
 #ifndef PRACTICA_1_NODOCABECERA_H
 #define PRACTICA_1_NODOCABECERA_H
+#include "NodoInterno.h"
 
-
+//Funciona como guia y puntero de las columnas
 template<typename T>class NodoCabecera
 {
     public:
         int id;
         NodoCabecera<T>* siguiente;
         NodoCabecera<T>* anterior;
-        NodoCabecera<T>* acceso;
+        /*
+         * Forma de obtener las coordenadas
+         */
+        NodoInterno<T>* acceso;
         NodoCabecera(int id)
         {
             this->id = id;
@@ -22,6 +26,6 @@ template<typename T>class NodoCabecera
         }
 };
 
-#include "NodoCabecera.cpp"
+
 
 #endif //PRACTICA_1_NODOCABECERA_H

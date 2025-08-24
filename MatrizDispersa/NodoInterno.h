@@ -9,20 +9,27 @@
 template <typename T> class NodoInterno
 {
 public:
+    //coordenadas
     int x;
     int y;
+    //Objeto o variable con valor en especifico
     T valor;
+    //Punteros
+    //Punteros de forma horizontal
     NodoInterno<T>* siguiente;
     NodoInterno<T>* anterior;
+    //Punteros de forma vertical
     NodoInterno<T>* arriba;
     NodoInterno<T>* abajo;
 
+    //Constructor para inicializar la clase
     NodoInterno(int x, int y, T valor)
     {
         this->x = x;
         this->y = y;
         this->valor = valor;
 
+        //Nulos por defecto
         this->siguiente = nullptr;
         this->anterior = nullptr;
         this->arriba = nullptr;
