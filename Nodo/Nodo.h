@@ -9,10 +9,10 @@
 template <typename T>
 class Nodo
 {
-    private:
-     T valor;
-     Nodo<T>* siguiente;
+
     public:
+    T valor;
+    Nodo<T>* siguiente;
      Nodo(T valor)
      {
          this->valor = valor;

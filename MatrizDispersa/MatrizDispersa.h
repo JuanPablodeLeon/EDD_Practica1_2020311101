@@ -4,8 +4,8 @@
 
 #ifndef PRACTICA_1_MATRIZDISPERSA_H
 #define PRACTICA_1_MATRIZDISPERSA_H
-#import <utility>
-#import "ListaEncabezado.h"
+#include  <utility>
+#include  "ListaEncabezado.h"
 #include "NodoCabecera.h"
 #include "NodoInterno.h"
 
@@ -37,7 +37,7 @@ class MatrizDispersa
     public:
         MatrizDispersa(): capa(0), filas("fila"), columnas("columna") {}
 
-        void insertar(T valor, int fila, int columna);
+        void insertar(/*T valor, */int fila, int columna);
 
         void mostrar();
 
@@ -46,9 +46,9 @@ class MatrizDispersa
 
 
 template <typename T>
-void MatrizDispersa<T>::insertar(T valor, int fila, int columna)
+void MatrizDispersa<T>::insertar(/*T valor, */int fila, int columna)
 {
-     NodoInterno<T>* nuevo = new NodoInterno<T>(fila, columna, valor);
+     NodoInterno<T>* nuevo = new NodoInterno<T>(fila, columna/*, valor*/);
         auto [nodoFila, nodoColumna] = revisarCabeceras(fila, columna);
 
         // Insertar nodo Interno en la fila Correspondiente:
@@ -130,11 +130,40 @@ void MatrizDispersa<T>::mostrar()
         NodoInterno<T>* nodoActual = filaActual->acceso;
         while (nodoActual != nullptr) {
             std::cout << "Fila: " << nodoActual->x
-                 << ", Col: " << nodoActual->y
-                 << ", Valor: " << nodoActual->valor << std::endl;
+                 << ", Col: " << nodoActual->y<< std::endl;
+               /*  << ", Valor: " << nodoActual->valor << std::endl;*/
             nodoActual = nodoActual->siguiente;
         }
         filaActual = filaActual->siguiente;
+    }
+}
+template <typename T>
+MatrizDispersa<T>::~MatrizDispersa()
+{
+
+    NodoCabecera<T>*columnaActual = columnas.primero;
+    while (columnaActual != nullptr)
+    {
+        NodoInterno<T>* nodoActual = columnaActual->acceso;
+        while (nodoActual != nullptr)
+        {
+          //  std::cout << "Elminando Nodo: " << nodoActual->x <<","<<nodoActual->y<< std::endl;
+            NodoInterno<T>* temp = nodoActual;
+            std::cout << "Elminando Nodo: " << temp->x <<","<<temp->y<< std::endl;
+            nodoActual = nodoActual->anterior;
+            delete temp;
+        }
+        NodoCabecera<T>* tempColumna = columnaActual;
+        columnaActual = columnaActual->siguiente;
+        delete tempColumna;
+    }
+
+    NodoCabecera<T>* filaActual = filas.primero;
+    while (filaActual != nullptr)
+    {
+        NodoCabecera<T>* temp = filaActual;
+        filaActual = filaActual->siguiente;
+        delete temp;
     }
 }
 
