@@ -13,7 +13,7 @@ public:
     int x;
     int y;
     //Objeto o variable con valor en especifico
-   // T valor;
+    T valor;
     //Punteros
     //Punteros de forma horizontal
     NodoInterno<T>* siguiente;
@@ -23,11 +23,11 @@ public:
     NodoInterno<T>* abajo;
 
     //Constructor para inicializar la clase
-    NodoInterno(int x, int y/*, T valor*/)
+    NodoInterno(int x, int y, T valor)
     {
         this->x = x;
         this->y = y;
-        //this->valor = valor;
+        this->valor = valor;
 
         //Nulos por defecto
         this->siguiente = nullptr;

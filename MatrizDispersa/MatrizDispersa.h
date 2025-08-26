@@ -16,7 +16,7 @@ class MatrizDispersa
         int capa;
         ListaEncabezado<T> filas;
         ListaEncabezado<T> columnas;
-      //  void revisarCabereras(int fila, int columna, NodoCabecera<T>*& nodoFila, NodoCabecera<T>*& nodoColumnas);
+
         std::pair<NodoCabecera<T>*, NodoCabecera<T>*> revisarCabeceras(int fila, int columna)
         {
             NodoCabecera<T>* nodoFila = filas.getEncabezado(fila);
@@ -37,18 +37,19 @@ class MatrizDispersa
     public:
         MatrizDispersa(): capa(0), filas("fila"), columnas("columna") {}
 
-        void insertar(/*T valor, */int fila, int columna);
+        void insertar(T valor, int fila, int columna);
 
         void mostrar();
+        bool eliminar(int fila, int columna);
 
         ~MatrizDispersa();
 };
 
 
 template <typename T>
-void MatrizDispersa<T>::insertar(/*T valor, */int fila, int columna)
+void MatrizDispersa<T>::insertar(T valor, int fila, int columna)
 {
-     NodoInterno<T>* nuevo = new NodoInterno<T>(fila, columna/*, valor*/);
+     NodoInterno<T>* nuevo = new NodoInterno<T>(fila, columna, valor);
         auto [nodoFila, nodoColumna] = revisarCabeceras(fila, columna);
 
         // Insertar nodo Interno en la fila Correspondiente:
@@ -124,17 +125,92 @@ void MatrizDispersa<T>::insertar(/*T valor, */int fila, int columna)
 template <typename T>
 void MatrizDispersa<T>::mostrar()
 {
-    std::cout << "Matriz Dispersa:" << std::endl;
+    // Encontrar los límites de la matriz
+    int minFila = INT_MAX, maxFila = INT_MIN;
+    int minColumna = INT_MAX, maxColumna = INT_MIN;
+
+    // Encontrar los límites
     NodoCabecera<T>* filaActual = filas.primero;
     while (filaActual != nullptr) {
-        NodoInterno<T>* nodoActual = filaActual->acceso;
-        while (nodoActual != nullptr) {
-            std::cout << "Fila: " << nodoActual->x
-                 << ", Col: " << nodoActual->y<< std::endl;
-               /*  << ", Valor: " << nodoActual->valor << std::endl;*/
-            nodoActual = nodoActual->siguiente;
+        minFila = std::min(minFila, filaActual->id);
+        maxFila = std::max(maxFila, filaActual->id);
+
+        NodoInterno<T>* nodo = filaActual->acceso;
+        while (nodo != nullptr) {
+            minColumna = std::min(minColumna, nodo->y);
+            maxColumna = std::max(maxColumna, nodo->y);
+            nodo = nodo->siguiente;
         }
         filaActual = filaActual->siguiente;
+    }
+
+    if (minFila == INT_MAX) {
+        std::cout << "Matriz vacía" << std::endl;
+        return;
+    }
+
+    // Imprimir la matriz
+    for (int i = minFila; i <= maxFila; i++) {
+        // Línea de coordenadas
+        for (int j = minColumna; j <= maxColumna; j++) {
+            // Verificar si existe la coordenada
+            bool existe = false;
+            NodoCabecera<T>* fila = filas.getEncabezado(i);
+
+            if (fila != nullptr) {
+                NodoInterno<T>* actual = fila->acceso;
+                while (actual != nullptr) {
+                    if (actual->y == j) {
+                        existe = true;
+                        break;
+                    }
+                    actual = actual->siguiente;
+                }
+            }
+
+            if (existe) {
+                std::cout << "(" << i << "," << j << ")";
+            } else {
+                std::cout << "   .   ";  // Punto para celda vacía
+            }
+
+            // Conexión horizontal
+            if (j < maxColumna) {
+                std::cout << " - ";
+            }
+        }
+        std::cout << std::endl;
+
+        // Línea de conexiones verticales (excepto última fila)
+        if (i < maxFila) {
+            for (int j = minColumna; j <= maxColumna; j++) {
+                // Verificar si existe la coordenada
+                bool existe = false;
+                NodoCabecera<T>* fila = filas.getEncabezado(i);
+
+                if (fila != nullptr) {
+                    NodoInterno<T>* actual = fila->acceso;
+                    while (actual != nullptr) {
+                        if (actual->y == j) {
+                            existe = true;
+                            break;
+                        }
+                        actual = actual->siguiente;
+                    }
+                }
+
+                if (existe) {
+                    std::cout << "   |   ";
+                } else {
+                    std::cout << "       ";  // Espacio vacío
+                }
+
+                if (j < maxColumna) {
+                    std::cout << "     ";  // Espacio entre conexiones
+                }
+            }
+            std::cout << std::endl;
+        }
     }
 }
 template <typename T>
@@ -167,5 +243,61 @@ MatrizDispersa<T>::~MatrizDispersa()
     }
 }
 
+
+template <typename T>
+bool MatrizDispersa<T>::eliminar(int fila, int columna)
+{
+    NodoCabecera<T>* nodoFila = filas.getEncabezado(fila);
+    NodoCabecera<T>* nodoColumna = columnas.getEncabezado(columna);
+
+    if (nodoFila == nullptr || nodoColumna == nullptr) {
+        return false;  // No existe la fila o columna
+    }
+
+    // Buscar el nodo en la fila
+    NodoInterno<T>* actual = nodoFila->acceso;
+    NodoInterno<T>* anterior = nullptr;
+
+    while (actual != nullptr && actual->y != columna) {
+        anterior = actual;
+        actual = actual->siguiente;
+    }
+
+    if (actual == nullptr) {
+        return false;  // Nodo no encontrado
+    }
+
+    // Reenlazar en la fila
+    if (anterior == nullptr) {
+        nodoFila->acceso = actual->siguiente;
+    } else {
+        anterior->siguiente = actual->siguiente;
+    }
+    if (actual->siguiente != nullptr) {
+        actual->siguiente->anterior = anterior;
+    }
+
+    // Buscar el nodo en la columna
+    actual = nodoColumna->acceso;
+    anterior = nullptr;
+
+    while (actual != nullptr && actual->x != fila) {
+        anterior = actual;
+        actual = actual->abajo;
+    }
+
+    // Reenlazar en la columna
+    if (anterior == nullptr) {
+        nodoColumna->acceso = actual->abajo;
+    } else {
+        anterior->abajo = actual->abajo;
+    }
+    if (actual->abajo != nullptr) {
+        actual->abajo->arriba = anterior;
+    }
+
+    delete actual;  // Liberar memoria del nodo
+    return true;
+}
 
 #endif //PRACTICA_1_MATRIZDISPERSA_H

@@ -1,11 +1,15 @@
 #include <iostream>
-#include "Jugabilidad/Menu.h"
+#include "MatrizDispersa/MatrizDispersa.h"
+//#include "Jugabilidad/Menu.h"
+#include "Jugador/Jugador.h"
 
 int main(){
+    Jugador* jugador = new Jugador('A');
+    jugador->mostrarInfo();
+    jugador->sumarPuntos(1);
+    jugador->mostrarInfo();
+    delete jugador;
 
-    std::cout << "Hello World!" << std::endl;
-    Menu men;
-    men.holamundo();
 
 return 0;
 }

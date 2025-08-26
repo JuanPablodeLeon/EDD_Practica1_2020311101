@@ -2,10 +2,9 @@
 // Created by juanp on 26/08/2025.
 //
 
-#include "Menu.h"
-
+// Jugabilidad/Menu.cpp
+#include "Menu.h"  // O "Jugabilidad/Menu.h" si es necesario
 #include <iostream>
-#include <ostream>
 
 void Menu::holamundo()
 {
