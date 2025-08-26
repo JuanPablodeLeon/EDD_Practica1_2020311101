@@ -17,6 +17,10 @@ set(SOURCES
         MatrizDispersa/ListaEncabezado.h
         MatrizDispersa/MatrizDispersa.cpp
         MatrizDispersa/MatrizDispersa.h
+        Pila/Pila.cpp
+        Pila/Pila.h
+        Jugabilidad/Menu.cpp
+        Jugabilidad/Menu.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

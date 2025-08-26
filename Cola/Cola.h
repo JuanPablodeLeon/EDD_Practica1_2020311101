@@ -5,24 +5,27 @@
 #ifndef PRACTICA_1_COLA_H
 #define PRACTICA_1_COLA_H
 #include <iostream>
-
 #include "../Nodo/Nodo.h"
 
 
  template <typename T>
 class Cola
 {
-
- public:
+     private:
      Nodo<T>* primero;
      Nodo<T>* ultimo;
      int size;
+ public:
+
 
     Cola();
      void insertar(T dato);
      T extraer();
-     void imprimir() const;
-     bool estaVacia() const;
+     void imprimir();
+     bool estaVacia();
+     T verPrimero();
+     int obtenerSize();
+
     ~Cola()
     {
         while (!estaVacia())
@@ -55,59 +58,66 @@ void Cola<T>::insertar(T dato)
     else //Se van agregando datos despues del primero
     {
         ultimo->siguiente = nuevo;
-        primero = nuevo;
+        ultimo = nuevo;
     }
-    size += 1; //Aumenta el tamaño de la cola
+    size ++; //Aumenta el tamaño de la cola
 }
+
 //Sacar el primer elemento de la cola
 template <typename T>
 T Cola<T>::extraer()
 {
-    if (this->primero == nullptr)
+    if (primero == nullptr)
     {
-       throw std::out_of_range("La cola esta vacia");
+       return T();
     }
-    Nodo<T>* temp = this->primero; //Se usa temp en la cabeza para no perder la referencia
-    this->primero = this->primero->siguiente;
-    if (this->primero == nullptr) //Se verifica si el nuevo primero tiene algun valor
-    {
-        this->ultimo = nullptr;
-    }
-    this->size -= 1; //se disminuye el tamaño de la lista
-    return temp->valor; //Devuelve el valor de la cabeza para poder sacarlo
-
-    /*if (primero == nullptr) {
-        throw std::out_of_range("La cola está vacía");
-    }
-
-    Nodo<T>* temp = primero;
-    T valor = primero->valor;
+    Nodo<T>* temp = primero; //Se usa temp en la cabeza para no perder la referencia
+    T valor_extraido = temp->valor;
     primero = primero->siguiente;
 
-    if (primero == nullptr) {
+    if (primero == nullptr)
+    {
         ultimo = nullptr;
     }
 
     delete temp;
     size--;
-    return valor;*/
+    return valor_extraido;
 }
 
+//Mostrar los elementos de la cola
 template <typename T>
-void ::Cola<T>::imprimir() const
+void ::Cola<T>::imprimir()
 {
-    Nodo<T>* temp = this->primero;
+    Nodo<T>* temp = primero;
     while (temp != nullptr)
     {
-        std::cout << temp->valor << " "<<std::endl;
+        std::cout << temp->valor <<std::endl;
         temp = temp->siguiente;
     }
 }
 
 template <typename T>
-bool Cola<T>::estaVacia() const
+bool Cola<T>::estaVacia()
 {
     return primero == nullptr;
 }
+
+template <typename T>
+T Cola<T>::verPrimero()
+{
+    if (primero == nullptr)
+    {
+        return T();
+    }
+    return primero->valor;
+}
+
+template <typename T>
+int Cola<T>::obtenerSize()
+{
+    return size;
+}
+
 
 #endif //PRACTICA_1_COLA_H
