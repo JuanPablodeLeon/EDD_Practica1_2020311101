@@ -24,6 +24,10 @@ class Jugador
         void mostrarInfo();
 };
 
+Jugador::Jugador()
+{
+
+}
 Jugador::Jugador(char letra)
 {
     this->letra = letra;

@@ -4,11 +4,18 @@
 
 #include "ConfiguracionInicial.h"
 
+#include <csetjmp>
+
 ConfiguracionInicial::ConfiguracionInicial()
 {
     this->fila = 0;
     this->columna = 0;
     this->cantidadJugadores = 0;
+}
+
+ConfiguracionInicial::~ConfiguracionInicial()
+{
+    delete cola;
 }
 
 void ConfiguracionInicial::inicio()
@@ -24,6 +31,7 @@ void ConfiguracionInicial::inicio()
 
     //cola->imprimir();
 }
+
 
 void ConfiguracionInicial::configTablero()
 {
@@ -75,3 +83,9 @@ void ConfiguracionInicial::configJugadores()
         cola->insertar(nuevoJugador);
     }
 }
+
+void ConfiguracionInicial::mostrarCola()
+{
+    std::cout << "----- Elementos en la Cola ------" << std::endl;
+}
+

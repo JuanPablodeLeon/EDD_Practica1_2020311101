@@ -23,6 +23,7 @@ class ConfiguracionInicial
         int getFila();
         int getColumna();
         Cola<Jugador>* getCola();
+        void mostrarCola();
 
 };
 

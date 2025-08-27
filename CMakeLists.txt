@@ -14,13 +14,12 @@ set(SOURCES
         MatrizDispersa/ListaEncabezado.cpp
         MatrizDispersa/MatrizDispersa.cpp
         Pila/Pila.cpp
-        Configuraciones/Menu.cpp
         Jugador/Jugador.cpp
         Jugador/Jugador.h
         Configuraciones/ConfiguracionInicial.cpp
         Configuraciones/ConfiguracionInicial.h
-        Cuadrado.cpp
-        Cuadrado.h
+        Cuadrado/Cuadrado.cpp
+        Cuadrado/Cuadrado.h
         Juego/Juego.cpp
         Juego/Juego.h
 )
