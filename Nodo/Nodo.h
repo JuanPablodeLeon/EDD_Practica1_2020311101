@@ -10,14 +10,17 @@ template <typename T>
 class Nodo
 {
 
+    private:
+
+
     public:
-    T valor;
-    Nodo<T>* siguiente;
-     Nodo(T valor)
-     {
-         this->valor = valor;
-         this->siguiente = nullptr;
-     }
+        T valor;
+        Nodo<T>* siguiente;
+         Nodo(T valor)
+         {
+             this->valor = valor;
+             this->siguiente = nullptr;
+         }
 };
 
 

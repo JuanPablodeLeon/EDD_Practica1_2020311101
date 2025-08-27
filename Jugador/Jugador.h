@@ -18,6 +18,7 @@ class Jugador
         Pila<char> powerUps;
 
     public:
+        Jugador();
         Jugador(char letra);
         void sumarPuntos(int opcion);
         void mostrarInfo();

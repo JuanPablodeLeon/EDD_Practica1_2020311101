@@ -87,7 +87,7 @@ T Cola<T>::extraer()
 
 //Mostrar los elementos de la cola
 template <typename T>
-void ::Cola<T>::imprimir()
+void Cola<T>::imprimir()
 {
     Nodo<T>* temp = primero;
     while (temp != nullptr)
