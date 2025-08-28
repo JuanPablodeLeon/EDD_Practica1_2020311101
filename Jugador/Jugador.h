@@ -22,6 +22,7 @@ class Jugador
         Jugador(const Jugador &otro);
         Jugador(char letra);
         ~Jugador();
+        Jugador& operator=(Jugador const &otro);
         void sumarPuntos(int opcion);
         void mostrarInfo();
 

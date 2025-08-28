@@ -13,7 +13,7 @@ class ConfiguracionInicial
         int fila;
         int columna;
         int cantidadJugadores;
-       Cola<Jugador>* cola;
+       Cola<Jugador*>* cola;
         void configJugadores();
         void configTablero();
     public:
@@ -22,7 +22,7 @@ class ConfiguracionInicial
         void inicio();
         int getFila();
         int getColumna();
-        Cola<Jugador>* getCola();
+        Cola<Jugador*>* getCola() const;
         void mostrarCola();
 
 };

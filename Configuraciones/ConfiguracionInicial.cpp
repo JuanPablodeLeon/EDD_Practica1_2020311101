@@ -11,10 +11,16 @@ ConfiguracionInicial::ConfiguracionInicial()
     this->fila = 0;
     this->columna = 0;
     this->cantidadJugadores = 0;
+    this->cola = new Cola<Jugador*>();
 }
 
 ConfiguracionInicial::~ConfiguracionInicial()
 {
+    // Liberar memoria de los jugadores y luego la cola
+    while (!cola->estaVacia()) {
+        Jugador* jugador = cola->extraer();
+        delete jugador;  // Liberar cada jugador
+    }
     delete cola;
 }
 
@@ -79,7 +85,7 @@ void ConfiguracionInicial::configJugadores()
         std::cout << "Ingrese la letra ";
         std::cin >> letraJugador;
 
-        Jugador nuevoJugador(letraJugador);
+        Jugador* nuevoJugador = new Jugador(letraJugador);
         cola->insertar(nuevoJugador);
     }
 }
@@ -89,3 +95,6 @@ void ConfiguracionInicial::mostrarCola()
     std::cout << "----- Elementos en la Cola ------" << std::endl;
 }
 
+Cola<Jugador*>* ConfiguracionInicial::getCola() const {
+    return cola;  // ✅ Tipo correcto
+}

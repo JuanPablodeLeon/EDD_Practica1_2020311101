@@ -17,11 +17,11 @@ Jugador::Jugador()
 Jugador::Jugador(const Jugador &otro)
 {
     this->letra = otro.letra;
-    this->puntos = 0;
-    this->cantidadInicialesColocadas = 0;
-    this->puntosNuevasTierras = 0;
-    this->puntosFilas = 0;
-    this->puntosColumnas = 0;
+    this->puntos = otro.puntos;
+    this->cantidadInicialesColocadas = otro.cantidadInicialesColocadas;
+    this->puntosNuevasTierras = otro.puntosNuevasTierras;
+    this->puntosFilas = otro.puntosFilas;
+    this->puntosColumnas = otro.puntosColumnas;
     // this->powerUps = Pila<char>();*/
 }
 Jugador::Jugador(char letra)
@@ -41,6 +41,18 @@ Jugador::~Jugador()
     std::cout <<"Eliminado"<<std::endl;
 }
 
+Jugador& Jugador::operator=(const Jugador  &otro)
+{
+    if (this != &otro) {
+        this->letra = otro.letra;
+        this->puntos = otro.puntos;
+        this->cantidadInicialesColocadas = otro.cantidadInicialesColocadas;
+        this->puntosNuevasTierras = otro.puntosNuevasTierras;
+        this->puntosFilas = otro.puntosFilas;
+        this->puntosColumnas = otro.puntosColumnas;
+    }
+    return *this;
+}
 
 void Jugador::sumarPuntos(int opcion)
 {
