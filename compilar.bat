@@ -25,11 +25,13 @@
     g++ -c Pila\Pila.cpp -std=c++17 -o build\Pila.o
     g++ -c Jugador/Jugador.cpp -std=c++17 -o build\Jugador.o
     g++ -c Configuraciones/ConfiguracionInicial.cpp -std=c++17 -o build\ConfiguracionInicial.o
+    g++ -c Juego/Juego.cpp -std=c++17 -o build\Juego.o
+
 
 
     echo.
     echo Enlazando objetos...
-    g++ build\main.o build\Nodo.o build\Cola.o build\NodoInterno.o build\NodoCabecera.o build\ListaEncabezado.o build\MatrizDispersa.o build\Pila.o build\Jugador.o build\ConfiguracionInicial.o -o mi_programa.exe
+    g++ build\main.o build\Nodo.o build\Cola.o build\NodoInterno.o build\NodoCabecera.o build\ListaEncabezado.o build\MatrizDispersa.o build\Pila.o build\Jugador.o build\ConfiguracionInicial.o build\Juego.o -o mi_programa.exe
 
     echo.
     if exist mi_programa.exe (

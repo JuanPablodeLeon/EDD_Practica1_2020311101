@@ -75,6 +75,7 @@ void ConfiguracionInicial::configJugadores()
         }
     }
     while (cantidadJugadores < 2);
+
     std::cout << "Cantidad de jugadores es de  "<<cantidadJugadores<<std::endl;
     std::cout << "-------- Aregar inicial a Jugadores -------- " <<std::endl;
     for (int i = 0; i < cantidadJugadores; ++i)
@@ -97,4 +98,14 @@ void ConfiguracionInicial::mostrarCola()
 
 Cola<Jugador*>* ConfiguracionInicial::getCola() const {
     return cola;  // ✅ Tipo correcto
+}
+
+int ConfiguracionInicial::getFila()
+{
+    return fila;
+}
+
+int ConfiguracionInicial::getColumna()
+{
+    return columna;
 }

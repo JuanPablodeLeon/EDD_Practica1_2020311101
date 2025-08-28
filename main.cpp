@@ -1,10 +1,10 @@
-#include "Configuraciones/ConfiguracionInicial.h"
+
+#include "Juego/Juego.h"
 
 int main(){
 
-    std::cout << "Hola Mundo" << std::endl;
-    ConfiguracionInicial config;
-    config.inicio();
+    Juego game;
+    game.iniciar();
 
 
 return 0;

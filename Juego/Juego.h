@@ -14,14 +14,15 @@ class Juego
 private:
     ConfiguracionInicial config;
     MatrizDispersa<int>* tableroCoordenadas;
-    MatrizDispersa<int>* tableroCuadros;
+    //MatrizDispersa<int>* tableroCuadros;
     void inicalizarTableros();
     void juabilidad();
     void realizarTurnos(Jugador& jugador);
-    void mostrarTableros();
     public:
     Juego();
     ~Juego();
+public:
+    void iniciar();
 };
 
 

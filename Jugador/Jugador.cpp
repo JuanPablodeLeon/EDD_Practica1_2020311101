@@ -86,3 +86,8 @@ void Jugador::mostrarInfo()
     std::cout << letra << std::endl;
     std::cout << "puntos: " << puntos << std::endl;
 }
+
+char Jugador::getLetrar()
+{
+    return letra;
+}
